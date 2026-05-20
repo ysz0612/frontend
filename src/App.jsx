@@ -9,19 +9,36 @@ import HeaderBar from './no2_conponents/layout/HeaderBar'
 import SiderBar from './no2_conponents/layout/SiderBar'
 
 import styled from 'styled-components'
+import LoginPage from './no1_pages/user/LoginPage'
+import RegisterPage from './no1_pages/user/RegisterPage'
+
+const initialState = [
+  {id: 1, username: "John", password: "1111"},
+  {id: 1, username: "Peter", password: "2222"},
+  {id: 1, username: "John", password: "3333"},
+  {id: 1, username: "John", password: "4444"}
+]
+
+const initialMode ={
+  isLogin: false,
+  username: ""
+}
 
 function App() {
-
+  const [users, setUsers] = useState(initialState);
+  const [loginMode, setLoginMode] = useState(initialMode);
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <BrowserRouter>
-
+      {console.log(users)}
       <Layout>
 
         <HeaderBar
+        loginMode={loginMode}
           mobileOpen={mobileOpen}
           setMobileOpen={setMobileOpen}
+          setLoginMode={setLoginMode}
         />
 
         <SiderBar
@@ -31,6 +48,17 @@ function App() {
 
         <Content>
           <Routes>
+            <Route path="/login" element={
+              <LoginPage
+                users={users}
+                setLoginMode={setLoginMode} 
+                />}
+               />
+               <Route path="/register" element={
+                <RegisterPage
+                    setUsers={setUsers}
+                />}
+               />
             <Route path="/" element={<HomePage />} />
             <Route path="/todo" element={<TodoPage />} />
             <Route path="/employee" element={<EmployeePage />} />
@@ -51,6 +79,7 @@ const Layout = styled.div`
 `
 
 const Content = styled.main`
+  flex: 1;
   margin-left: 240px;
   padding: 90px 30px 30px;
 

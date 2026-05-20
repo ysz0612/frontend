@@ -1,35 +1,68 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-function HeaderBar({ mobileOpen, setMobileOpen }) {
+function HeaderBar({
+  loginMode,
+  setLoginMode,
+  mobileOpen,
+  setMobileOpen
+}) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setLoginMode(prev=>(
+      {...prev, isLogin: false, username:''}
+    ));
+    alert("로그아웃 되셨습니다.")
+    navigate("/login");
+  };
 
   return (
     <Container>
-
       <Left>
-
         <MenuButton
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           ☰
         </MenuButton>
 
-        <Logo>
-          Logo
-        </Logo>
-
+        <Logo>Logo</Logo>
       </Left>
 
       <Right>
-        <AuthButton>로그인</AuthButton>
-        <AuthButton primary>회원가입</AuthButton>
-      </Right>
+        {loginMode.isLogin ? (
+          <UserBox>
+            <UserText>
+              안녕하세요! {loginMode.username}
+            </UserText>
 
+            <LogoutButton onClick={handleLogout}>
+              로그아웃
+            </LogoutButton>
+          </UserBox>
+        ) : (
+          <ButtonGroup>
+            <AuthButton
+              onClick={() => navigate("/login")}
+            >
+              로그인
+            </AuthButton>
+
+            <AuthButton
+              primary
+              onClick={() => navigate("/register")}
+            >
+              회원가입
+            </AuthButton>
+          </ButtonGroup>
+        )}
+      </Right>
     </Container>
-  )
+  );
 }
 
-export default HeaderBar
+export default HeaderBar;
 
 const Container = styled.header`
   position: fixed;
@@ -47,50 +80,79 @@ const Container = styled.header`
   align-items: center;
 
   padding: 0 20px;
+  box-sizing: border-box;
 
   z-index: 1000;
-`
+`;
 
 const Left = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-`
+`;
+
+const Right = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const Logo = styled.div`
   font-size: 22px;
   font-weight: bold;
-`
+`;
 
-const Right = styled.div`
+const UserBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const UserText = styled.div`
+  font-size: 14px;
+  color: white;
+`;
+
+const ButtonGroup = styled.div`
   display: flex;
   gap: 10px;
-`
+`;
 
-const AuthButton = styled.button`
+const BaseButton = styled.button`
   border: none;
   padding: 8px 14px;
   border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
 
   cursor: pointer;
+  transition: 0.2s;
 
+  @media (max-width: 768px) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+`;
+
+const AuthButton = styled(BaseButton)`
   background: ${(props) =>
     props.primary ? '#4da6ff' : 'white'};
 
   color: ${(props) =>
     props.primary ? 'white' : '#222'};
 
-  transition: 0.2s;
+  &:hover {
+    opacity: 0.85;
+  }
+`;
+
+const LogoutButton = styled(BaseButton)`
+  background: #ef4444;
+  color: white;
 
   &:hover {
-    opacity: 0.8;
+    background: #dc2626;
   }
-
-  @media (max-width: 768px) {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-`
+`;
 
 const MenuButton = styled.button`
   display: none;
@@ -106,4 +168,4 @@ const MenuButton = styled.button`
   @media (max-width: 768px) {
     display: block;
   }
-`
+`;

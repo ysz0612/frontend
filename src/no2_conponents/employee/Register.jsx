@@ -1,24 +1,36 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = {
-    id:'', name:'', email:'', job:'', pay:null
+    id:null, name:'', email:'', job:'', pay:null
 }
 
 const Register = ({setInfos}) => {
+    const navigate = useNavigate();
     const [info, setInfo] = useState(initialState)
-    const handleChange = (event) =>{
+    const handleChange = () =>{
         const{name, value} = event.target;
-        setInfo(prev=>(
+        setInfo((prev)=>(
             {...prev, [name]: value}
         ))
+    }
     const handleSubmit = (event) =>{
         event.preventDefault();
-        setInfos(prev => (
+        setInfos((prev) => (
             [...prev, info]
         ))
     }
   return (
       <form onSubmit={handleSubmit}>
+        <div>
+            <label>id</label>
+                <input
+                    type="number"
+                    name= "id"
+                    value= {info.id}
+                    onChange={handleChange}
+                />
+        </div>
         <div>
             <label>이름</label>
                 <input 
@@ -55,11 +67,12 @@ const Register = ({setInfos}) => {
                     onChange={handleChange}
                 />
         </div>
+        <button>제출</button>
        
       </form>
     
   )
 }
-}
+
 
 export default Register
