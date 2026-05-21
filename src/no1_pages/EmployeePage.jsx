@@ -1,23 +1,73 @@
-import React, {useState} from 'react'
-import EmployeeTable from '../no2_conponents/employee/EmployeeTable';
-import Register from '../no2_conponents/employee/Register';
+import React, {useEffect, useState} from 'react'
+import EmployeeList from '../no2_conponents/employee/EmployeeList'
+import EmployeeTable from '../no2_conponents/employee/EmployeeTable'
+import EmployeeRegister from '../no2_conponents/employee/EmployeeRegister'
+import EmployeeUpdate from '../no2_conponents/employee/EmployeeUpdate'
 
-const initialState = [
-  {id: 1, name: "John", email: "john@example.com", job: "forntend", pay: 600},
-  {id: 2, name: "Peter", email: "peter@example.com", job: "backend", pay: 600},
-  {id: 3, name: "Susan", email: "susan@example.com", job: "db", pay: 600},
-  {id: 4, name: "Sue", email: "sue@example.com", job: "ai", pay: 600}
+
+const initialEmps = [
+  {id: "1", name: "John", email: "john@example.com", job: "forntend", pay: 600},
+  {id: "2", name: "Peter", email: "peter@example.com", job: "backend", pay: 600},
+  {id: "3", name: "Susan", email: "susan@example.com", job: "db", pay: 600},
+  {id: "4", name: "Sue", email: "sue@example.com", job: "ai", pay: 600}
 ]
 
+const initialEmp ={
+  id:'', name:'', email:'', job:'', pay:''
+}
+const initialState = {
+  empTable: initialEmps,
+  emp: initialEmp,
+  mode: '',
+  selectedId: ""
+}
 
 const EmployeePage = () => {
+  const [state, setState] = useState(initialState);
+  const {empTable, emp, selectedId, mode} = state;
 
-  const [infos, setInfos] = useState(initialState); // state 구성
+  useEffect(()=>{
+    selectedId &&
+    setState(prev=>(
+      {...prev, 
+        emp:empTable.filter(item => item.id === selectedId)[0]
+      }
+    ))
+  }, [selectedId, empTable])
+
+  const handleDelete =()=>{
+
+    if(!selectedId) {
+      alert("삭제할 데이터를 선택하세요");
+      return;
+    }
+
+    setState(prev => (
+      {
+        ...prev,
+        empTable: prev.empTable.filter(item => item.id !== selectedId),
+        emp: initialEmp,
+        selectedId: ""
+      }
+    ))
+  }
 
   return (
     <div>
-      <EmployeeTable infos={infos}/>
-      <Register setInfos={setInfos}/>
+      <EmployeeList state={state} setState={setState}/>
+      <EmployeeTable state={state}/>
+      <div>
+        <button onClick={()=> setState(prev=>({...prev, mode:"register"}))}>등록</button>
+        <button onClick={()=> setState(prev=>({...prev, mode:"update"}))}>수정</button>
+        <button onClick={()=> setState(prev=>({...prev, mode:"delete"}))}>삭제</button>
+      </div>
+      {
+        mode === "register" ?
+        <EmployeeRegister setState={setState}/>
+        : mode === "update" ?
+        <EmployeeUpdate emp={emp} setState={setState}/>
+        : <button onClick={handleDelete}>위 데이터를 삭제하시겠습니까?</button>
+      }
     </div>
   )
 }
