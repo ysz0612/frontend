@@ -4,12 +4,9 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const LoginPage = ({users, setLoginMode}) => {
+const LoginPage = () => {
     return (
-        <LoginForm
-            users={users}
-            setLoginMode={setLoginMode}
-        />
+        <LoginForm/>
     )
 }
 

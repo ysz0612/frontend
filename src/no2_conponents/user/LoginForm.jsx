@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { UserContext } from '../../no0_context/UserContext';
 
 const initialState = {
   username: "",
@@ -8,6 +9,7 @@ const initialState = {
 };
 
 const Loginform = ({ users, setLoginMode }) => {
+  const {dispatch} = useContext(UserContext);
   const navigate = useNavigate();
   const [user, setUser] = useState(initialState);
 
@@ -30,14 +32,8 @@ const Loginform = ({ users, setLoginMode }) => {
     )[0];
 
     if (loginUser) {
-      alert("성공");
-
-      setLoginMode((prev) => ({
-        ...prev,
-        isLogin: true,
-        username: loginUser.username
-      }));
-
+      alert("로그인 성공");
+      dispatch({type:"login", payload: loginUser})
       navigate("/");
     } else {
       alert("사용자가 아닙니다.");

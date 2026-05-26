@@ -11,36 +11,23 @@ import SiderBar from './no2_conponents/layout/SiderBar'
 import styled from 'styled-components'
 import LoginPage from './no1_pages/user/LoginPage'
 import RegisterPage from './no1_pages/user/RegisterPage'
+import EmployeeProvider, { EmployeeContext } from './no0_context/EmployeeContext'
+import UserProvider from './no0_context/UserContext'
 
-const initialState = [
-  {id: 1, username: "John", password: "1111"},
-  {id: 1, username: "Peter", password: "2222"},
-  {id: 1, username: "John", password: "3333"},
-  {id: 1, username: "John", password: "4444"}
-]
 
-const initialMode ={
-  isLogin: false,
-  username: ""
-}
 
 function App() {
-  const [users, setUsers] = useState(initialState);
-  const [loginMode, setLoginMode] = useState(initialMode);
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <BrowserRouter>
-      {console.log(users)}
       <Layout>
-
-        <HeaderBar
-        loginMode={loginMode}
+        <UserProvider>
+          <HeaderBar
           mobileOpen={mobileOpen}
           setMobileOpen={setMobileOpen}
-          setLoginMode={setLoginMode}
         />
-
+        </UserProvider>
         <SiderBar
           mobileOpen={mobileOpen}
           setMobileOpen={setMobileOpen}
@@ -48,20 +35,24 @@ function App() {
 
         <Content>
           <Routes>
-            <Route path="/login" element={
-              <LoginPage
-                users={users}
-                setLoginMode={setLoginMode} 
-                />}
+            <UserProvider>
+             <Routes>
+                  <Route path="/login" element={ <LoginPage/>}
                />
                <Route path="/register" element={
                 <RegisterPage
-                    setUsers={setUsers}
                 />}
-               />
+               /> 
+
+              </Routes>
+            </UserProvider>
             <Route path="/" element={<HomePage />} />
             <Route path="/todo" element={<TodoPage />} />
-            <Route path="/employee" element={<EmployeePage />} />
+            <Route path="/employee" element={
+              <EmployeeProvider>
+                <EmployeePage />
+              </EmployeeProvider>
+              } />
           </Routes>
         </Content>
 

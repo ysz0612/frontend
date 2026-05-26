@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
-const EmployeeList = ({state, setState}) => {
-    const {empTable} = state;
-    const handleClick = (id) => {
-        console.log("id", id)
-        setState(prev=> (
-            {...prev, selectedId: id }
-        ))
-    }
+const EmployeeList = () => {
+    const {state, dispatch} = useContext(EmployeeContext);
+  const {empTable, selectedId} = state;
+
+  const handleClick = (id) => {
+   dispatch({type: "select", payload: id})
+  }
+
   return (
-    <div>
-      {empTable.map(item=> (
-            <button onClick={()=> handleClick(item.id)}>
-                {item.name}
-            </button>
-        ))}
+    <div className="employee-list">
+      {empTable?.map(item => (
+        <button
+          key={item.id}
+          onClick={() => handleClick(item.id)}
+          style={{
+            background: selectedId === item.id ? "#2563eb" : undefined,
+            color: selectedId === item.id ? "white" : undefined
+          }}
+        >
+          {item.name}
+        </button>
+      ))}
     </div>
   )
 }

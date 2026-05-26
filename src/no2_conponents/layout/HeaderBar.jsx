@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../no0_context/UserContext';
 
 function HeaderBar({
-  loginMode,
-  setLoginMode,
   mobileOpen,
   setMobileOpen
 }) {
+  const {state, dispatch} = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setLoginMode(prev=>(
-      {...prev, isLogin: false, username:''}
-    ));
-    alert("로그아웃 되셨습니다.")
+    dispatch({type: "logout"});
+    alert("로그아웃 되셨습니다.");
     navigate("/login");
   };
 
@@ -31,10 +29,10 @@ function HeaderBar({
       </Left>
 
       <Right>
-        {loginMode.isLogin ? (
+        {state.isLogin ? (
           <UserBox>
             <UserText>
-              안녕하세요! {loginMode.username}
+              안녕하세요! {state.username}
             </UserText>
 
             <LogoutButton onClick={handleLogout}>
