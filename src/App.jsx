@@ -13,6 +13,9 @@ import LoginPage from './no1_pages/user/LoginPage'
 import RegisterPage from './no1_pages/user/RegisterPage'
 import EmployeeProvider, { EmployeeContext } from './no0_context/EmployeeContext'
 import UserProvider from './no0_context/UserContext'
+import TodoProvider from './no0_context/TodoContext'
+import { Provider } from 'react-redux'
+import store from './no3_store/Index'
 
 
 
@@ -21,13 +24,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Layout>
-        <UserProvider>
+      <Provider store={store}>
+        <Layout>
+        
           <HeaderBar
           mobileOpen={mobileOpen}
           setMobileOpen={setMobileOpen}
         />
-        </UserProvider>
+        
         <SiderBar
           mobileOpen={mobileOpen}
           setMobileOpen={setMobileOpen}
@@ -35,8 +39,8 @@ function App() {
 
         <Content>
           <Routes>
-            <UserProvider>
-             <Routes>
+            
+          
                   <Route path="/login" element={ <LoginPage/>}
                />
                <Route path="/register" element={
@@ -44,20 +48,23 @@ function App() {
                 />}
                /> 
 
-              </Routes>
-            </UserProvider>
+             
+            
             <Route path="/" element={<HomePage />} />
-            <Route path="/todo" element={<TodoPage />} />
-            <Route path="/employee" element={
-              <EmployeeProvider>
-                <EmployeePage />
-              </EmployeeProvider>
+            <Route path="/todo" element={
+                <TodoPage/>
               } />
+            <Route path="/employee" element={
+            
+                <EmployeePage />
+            
+              } />
+
           </Routes>
         </Content>
 
       </Layout>
-
+      </Provider>
     </BrowserRouter>
   )
 }

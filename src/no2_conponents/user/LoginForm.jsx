@@ -1,21 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { UserContext } from '../../no0_context/UserContext';
+// import { UserContext } from '../../no0_context/UserContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../no3_store/slice/userSlice';
 
 const initialState = {
   username: "",
   password: ""
 };
 
-const Loginform = ({ users, setLoginMode }) => {
-  const {dispatch} = useContext(UserContext);
+const Loginform = () => {
+  const {users} = useSelector(state=>state.user)
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [user, setUser] = useState(initialState);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setUser((prev) => ({
       ...prev,
       [name]: value
@@ -33,7 +36,7 @@ const Loginform = ({ users, setLoginMode }) => {
 
     if (loginUser) {
       alert("로그인 성공");
-      dispatch({type:"login", payload: loginUser})
+      dispatch(login(loginUser.username))
       navigate("/");
     } else {
       alert("사용자가 아닙니다.");

@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { EmployeeContext } from '../../no0_context/EmployeeContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { update } from '../../no3_store/slice/employeeSlice';
+// import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
 
 const EmployeeUpdate = () => {
-  const {state, dispatch} = useContext(EmployeeContext)
-  const {emp} = state;
-  const [ newemp, setNewEmp] = useState(emp);
-
-
+  const {emp} = useSelector(state=>state.emp);
+  const dispatch = useDispatch();
+  const [ newEmp, setNewEmp] = useState(emp);
   useEffect(()=>{
+    // console.log(emp)
     emp &&
     setNewEmp(emp)
   },[emp])  
@@ -22,7 +23,7 @@ const EmployeeUpdate = () => {
     
   const handleSubmmit = (event) =>{
       event.preventDefault();
-      dispatch({type: "update", payload: newemp })
+      dispatch(update(newEmp))
     }
     
       
@@ -33,7 +34,7 @@ const EmployeeUpdate = () => {
       <input
         type='text'
         name='name'
-        value={newemp.name}
+        value={newEmp.name}
         onChange={handleChange}
         placeholder='이름'
       />
@@ -42,7 +43,7 @@ const EmployeeUpdate = () => {
       <input
         type='email'
         name='email'
-        value={newemp.email}
+        value={newEmp.email}
         onChange={handleChange}
         placeholder='이메일'
       />
@@ -51,7 +52,7 @@ const EmployeeUpdate = () => {
       <input
         type='text'
         name='job'
-        value={newemp.job}
+        value={newEmp.job}
         onChange={handleChange}
         placeholder='직업'
       />
@@ -60,7 +61,7 @@ const EmployeeUpdate = () => {
       <input
         type='number'
         name='pay'
-        value={newemp.pay}
+        value={newEmp.pay}
         onChange={handleChange}
         placeholder='월급'
       />

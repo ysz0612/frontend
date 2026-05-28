@@ -26,7 +26,7 @@ const reducer = (state, action) =>{
         ...state,
         selectedId: action.payload
       }
-    case "set_emp":
+    case "setEmp":
       return {
         ...state,
         emp: action.payload

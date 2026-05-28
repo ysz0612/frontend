@@ -1,0 +1,45 @@
+import axios from "axios";
+
+export const userTotalGetApi = async ()=>{
+    try{
+        const response = await axios.get("http://localhost:3001/user")
+        return response.data
+    }catch(error){
+        return error
+    }
+}
+
+export const userGetApi = async ()=>{
+    try{
+        const response = await axios.get("http://localhost:3001/user/1")
+        return response.data
+    }catch(error){
+        return error
+    }
+}
+
+export const userGetApi = async (dataObj)=>{
+    try{
+        const response = await axios.post("http://localhost:3001/user", dataObj)
+        return response.data
+    }catch(error){
+        return error
+    }
+}
+
+export const userGetApi = async (dataObj)=>{
+    try{
+        const response = await axios.put("http://localhost:3001/user/2", dataObj)
+        return response.data
+    }catch(error){
+        return error
+    }
+}
+export const userGetApi = async ()=>{
+    try{
+        const response = await axios.delete("http://localhost:3001/user/2")
+        return response.data
+    }catch(error){
+        return error
+    }
+}
