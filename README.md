@@ -2,6 +2,10 @@ node_modules 다시 설치: npm install
 sever 띄우기: npm run dev
 rfce + enter
 
+json server열기
+cd s(tap키 누르기)
+package.json에서 주소 뜯어다가 엔터
+
 
 router: npm install react-router-dom
 CSS(스타일): npm install styled-components
@@ -22,6 +26,7 @@ useState => useReducer => useContext=> redux
 
 context: state, 내부함수(reducers)
 redux: state, 내부함수(reducers), 외부함수(extrareducers: api)
+
 
 Restful API
 get 전체 방식: url => return: 테이블(json)

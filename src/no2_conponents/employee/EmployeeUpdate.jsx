@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { update } from '../../no3_store/slice/employeeSlice';
+import { employeePutSlice } from '../../no3_store/slice/employeeSlice';
 // import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
 
@@ -23,7 +23,7 @@ const EmployeeUpdate = () => {
     
   const handleSubmmit = (event) =>{
       event.preventDefault();
-      dispatch(update(newEmp))
+      dispatch(employeePutSlice(newEmp))
     }
     
       

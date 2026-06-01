@@ -9,7 +9,7 @@ import EmployeeTable from '../no2_conponents/employee/EmployeeTable';
 import EmployeeUpdate from '../no2_conponents/employee/EmployeeUpdate';
 import { useDispatch, useSelector } from 'react-redux';
 // import { EmployeeContext } from '../no0_context/EmployeeContext';
-import { setEmp, remove, setMode } from '../no3_store/slice/employeeSlice';
+import { setEmp, setMode, employeeDeleteSlice } from '../no3_store/slice/employeeSlice';
 
 
 
@@ -18,9 +18,9 @@ const EmployeePage = () => {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    console.log(selectedId)
+    // console.log(selectedId)
     const newEmp = empTable.filter(item => item.id === selectedId)[0]
-    console.log("newEmp", newEmp)
+    // console.log("newEmp", newEmp)
     selectedId &&
     dispatch(setEmp(newEmp))
   }, [selectedId, empTable])
@@ -31,7 +31,7 @@ const EmployeePage = () => {
       alert("삭제할 데이터를 선택하세요");
       return;
     }
-    dispatch(remove())
+    dispatch(employeeDeleteSlice(selectedId))
   }
 
   return (

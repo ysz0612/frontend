@@ -56,5 +56,56 @@
       "email": "kim@example.com",
       "city": "San Antonio"
     }
-  ]
+  ],
+  "employees": [
+    {
+      "id": "2",
+      "name": "Peter",
+      "email": "peter@example.com",
+      "job": "backend",
+      "pay": 600
+    },
+    {
+      "id": "3",
+      "name": "Susan",
+      "email": "susan@example.com",
+      "job": "db",
+      "pay": 600
+    },
+    {
+      "id": "4",
+      "name": "Sue",
+      "email": "sue@example.com",
+      "job": "ai",
+      "pay": 600
+    }
+  ],
+  "todos": [
+    {
+      "id": "2",
+      "subject": "CSS 공부",
+      "checked": true
+    },
+    {
+      "id": "3",
+      "subject": "React 공부",
+      "checked": false
+    },
+    {
+      "id": "4",
+      "subject": "Python 공부",
+      "checked": false
+    },
+    {
+      "subject": "할 일",
+      "checked": true,
+      "id": "n7uDc0jhvN0"
+    },
+    {
+      "subject": "할 일",
+      "checked": false,
+      "id": "PbXn4pNf2W8"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

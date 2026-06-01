@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { EmployeeContext } from '../../no0_context/EmployeeContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { select } from '../../no3_store/slice/employeeSlice';
+import { employeeAllGetSlice, select } from '../../no3_store/slice/employeeSlice';
+import TodoList from '../todo/TodoList';
+
 
 const EmployeeList = () => {
   const {empTable, selectedId} = useSelector(state=>state.emp);
   const dispatch = useDispatch();
-
+  useEffect(()=> {
+    dispatch(employeeAllGetSlice())
+  }, [dispatch, TodoList])
 
 
   return (

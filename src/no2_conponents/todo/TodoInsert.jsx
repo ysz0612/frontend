@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import React, { useContext } from 'react'
 import { TodoContext } from '../../no0_context/TodoContext'
 import { useDispatch, useSelector } from 'react-redux'
-import { change, register } from '../../no3_store/slice/todoSlice'
+import {  todoPostSlice, change } from '../../no3_store/slice/todoSlice'
 
 const TodoInsert = () => {
     const {todoObj} = useSelector(state=>state.todo);
@@ -15,7 +15,7 @@ const TodoInsert = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(register())
+        dispatch(todoPostSlice(todoObj))
     }  
 
     return (
