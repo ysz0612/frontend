@@ -8,12 +8,19 @@ import EmployeeRegister from '../no2_conponents/employee/EmployeeRegister';
 import EmployeeTable from '../no2_conponents/employee/EmployeeTable';
 import EmployeeUpdate from '../no2_conponents/employee/EmployeeUpdate';
 import { useDispatch, useSelector } from 'react-redux';
-// import { EmployeeContext } from '../no0_context/EmployeeContext';
+import { EmployeeContext } from '../no0_context/EmployeeContext';
 import { setEmp, setMode, employeeDeleteSlice } from '../no3_store/slice/employeeSlice';
+// import {
+//   useAllGetEmployee,
+//   useDeleteEmployee,
+  
+//  } from '../../../no3_store/hooks/useEmployee';
 
 
 
 const EmployeePage = () => {
+
+  // const[selectedId, setSelectedId] = useState(1);
   const {selectedId, mode, empTable} = useSelector(state=>state.emp);
   const dispatch = useDispatch();
 
@@ -25,13 +32,16 @@ const EmployeePage = () => {
     dispatch(setEmp(newEmp))
   }, [selectedId, empTable])
 
-  const handleDelete = () => {
+ 
+
+  const handleDelete = (id) => {
 
     if(!selectedId) {
       alert("삭제할 데이터를 선택하세요");
       return;
     }
     dispatch(employeeDeleteSlice(selectedId))
+    alert("직원 정보가 삭제되었습니다.");
   }
 
   return (

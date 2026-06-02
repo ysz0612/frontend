@@ -62,7 +62,8 @@ export const todoDeleteSlice = createAsyncThunk(
     "todoDeleteSlice",
     async(id, thunkAPI)=> {
         try{
-            return await todoDeleteApi(id);
+            await todoDeleteApi(id);
+            return id;
         }catch(error){
             return thunkAPI.rejectWithValue(error.message)
         }
@@ -139,5 +140,5 @@ const todoSlice = createSlice({
         }
     })
 
-export const{remove, register, change} = todoSlice.actions;
+export const{change} = todoSlice.actions;
 export default todoSlice.reducer;

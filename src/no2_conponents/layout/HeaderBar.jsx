@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import { UserContext } from '../../no0_context/UserContext';
-import { logout } from '../../no3_store/slice/userSlice';
+import { userLogoutSlice } from '../../no3_store/slice/userSlice';
 
 function HeaderBar({
   mobileOpen,
   setMobileOpen
 }) {
-  const {isLogin, username} = useSelector(state=>state.user)
+  const {isLogin, user} = useSelector(state=>state.user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(userLogoutSlice());
     alert("로그아웃 되셨습니다.");
     navigate("/login");
   };
@@ -35,7 +35,7 @@ function HeaderBar({
         {isLogin ? (
           <UserBox>
             <UserText>
-              안녕하세요! {username}
+              안녕하세요! {user.username}
             </UserText>
 
             <LogoutButton onClick={handleLogout}>

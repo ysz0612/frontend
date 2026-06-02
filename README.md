@@ -13,6 +13,7 @@ CSS(스타일): npm install styled-components
 redux: npm install react-redux @reduxjs/toolkit
 json-server(RestfulAPI): npm install -g json-server
 api 라이브러리: npm install axios
+query 라이브러리: npm install @tanstack/react-query
 
 
 

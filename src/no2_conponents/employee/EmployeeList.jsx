@@ -3,6 +3,11 @@ import { EmployeeContext } from '../../no0_context/EmployeeContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { employeeAllGetSlice, select } from '../../no3_store/slice/employeeSlice';
 import TodoList from '../todo/TodoList';
+// import {
+//   useAllGetEmployee,
+//   useDeleteEmployee,
+  
+//  } from '../../no3_store/hooks/useEmployee';
 
 
 const EmployeeList = () => {
@@ -12,6 +17,7 @@ const EmployeeList = () => {
     dispatch(employeeAllGetSlice())
   }, [dispatch, TodoList])
 
+//  const {data: empTable=[], isLoading: loading, error} = useAllGetEmployee();
 
   return (
     <div className="employee-list">

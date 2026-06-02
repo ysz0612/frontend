@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // import { UserContext } from '../../no0_context/UserContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../no3_store/slice/userSlice';
+import { userLoginSlice } from '../../no3_store/slice/userSlice';
 
 const initialState = {
   username: "",
@@ -28,19 +28,17 @@ const Loginform = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const loginUser = users.filter(
-      (item) =>
-        item.username === user.username &&
-        item.password === user.password
-    )[0];
+    // const loginUser = users.filter(
+    //   (item) =>
+    //     item.username === user.username &&
+    //     item.password === user.password
+    // )[0];
 
-    if (loginUser) {
-      alert("로그인 성공");
-      dispatch(login(loginUser.username))
+    if (user) {
+      // alert("로그인 성공");
+      dispatch(userLoginSlice(user))
       navigate("/");
-    } else {
-      alert("사용자가 아닙니다.");
-    }
+    } 
   };
 
   return (

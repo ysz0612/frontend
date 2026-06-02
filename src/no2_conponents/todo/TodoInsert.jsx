@@ -1,12 +1,15 @@
 import styled from 'styled-components'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { TodoContext } from '../../no0_context/TodoContext'
 import { useDispatch, useSelector } from 'react-redux'
-import {  todoPostSlice, change } from '../../no3_store/slice/todoSlice'
+import {  todoPostSlice, change, todoAllGetSlice } from '../../no3_store/slice/todoSlice'
 
 const TodoInsert = () => {
     const {todoObj} = useSelector(state=>state.todo);
     const dispatch = useDispatch();
+    useEffect(() => {
+    dispatch(todoAllGetSlice());
+    }, []);
 
     const handleChange = (e) => {
         const {name, value} =e.target

@@ -6,7 +6,7 @@ import {
 } from "react-icons/md"
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import {  remove, todoDeleteSlice,todoPutSlice, todoToggleSlice } from '../../no3_store/slice/todoSlice'
+import { todoDeleteSlice,todoPutSlice, todoToggleSlice } from '../../no3_store/slice/todoSlice'
 
 // import {TodoContext } from '../../no0_context/TodoContext'
 
